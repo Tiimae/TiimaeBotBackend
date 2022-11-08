@@ -4,20 +4,17 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "xp")
+@Table(name = "settings")
 @Getter
 @Setter
-public class Xp {
+public class Settings {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -29,26 +26,11 @@ public class Xp {
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonBackReference
-    private UserGuild userGuild;
+    private Guild guild;
 
     @NotNull
-    @Value("0")
-    private long exp;
+    private String key;
     @NotNull
-    @Value("0")
-    private long level;
+    private String value;
 
-    @NotNull
-    @Column(nullable = false, updatable = false)
-    @CreationTimestamp
-    private Timestamp xplock;
-
-    public Xp() { }
-
-    public Xp(UserGuild userGuild, long exp, long level, Timestamp xplock) {
-        this.userGuild = userGuild;
-        this.exp = exp;
-        this.level = level;
-        this.xplock = xplock;
-    }
 }

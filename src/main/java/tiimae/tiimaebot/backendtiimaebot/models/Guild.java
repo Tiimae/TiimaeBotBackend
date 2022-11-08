@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -28,5 +29,18 @@ public class Guild {
 
     @OneToMany(mappedBy = "guild", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference
-    private Set<UserGuild> userGuildSet;
+    private Set<UserGuild> userGuildSet = new HashSet<>();
+
+    @OneToOne(mappedBy = "guild", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Settings settings;
+
+    public Guild() { }
+
+    public Guild(String name, long guildId, Set<UserGuild> userGuildSet, Settings settings) {
+        this.name = name;
+        this.guildId = guildId;
+        this.userGuildSet = userGuildSet;
+        this.settings = settings;
+    }
 }

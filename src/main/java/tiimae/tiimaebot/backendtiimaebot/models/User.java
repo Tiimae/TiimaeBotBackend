@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -24,11 +25,17 @@ public class User {
     private UUID id;
 
     private String name;
-    private long guildId;
+    private long userId;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference
-    private Set<UserGuild> userGuilds;
+    private Set<UserGuild> userGuilds = new HashSet<>();
 
+    public User() { }
 
+    public User(String name, long userId, Set<UserGuild> userGuilds) {
+        this.name = name;
+        this.userId = userId;
+        this.userGuilds = userGuilds;
+    }
 }

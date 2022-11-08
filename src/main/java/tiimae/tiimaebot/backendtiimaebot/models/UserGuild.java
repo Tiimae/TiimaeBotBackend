@@ -31,4 +31,17 @@ public class UserGuild {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonBackReference
     private Guild guild;
+
+    @OneToOne(mappedBy = "userGuild", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Xp xp;
+
+
+    public UserGuild () { }
+
+    public UserGuild(User user, Guild guild, Xp xp) {
+        this.user = user;
+        this.guild = guild;
+        this.xp = xp;
+    }
 }
