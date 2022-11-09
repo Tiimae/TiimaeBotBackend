@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import tiimae.tiimaebot.backendtiimaebot.DAO.UserDAO;
 import tiimae.tiimaebot.backendtiimaebot.DTO.UserDTO;
-import tiimae.tiimaebot.backendtiimaebot.Settings;
+import tiimae.tiimaebot.backendtiimaebot.StaticSettings;
 import tiimae.tiimaebot.backendtiimaebot.models.User;
 import tiimae.tiimaebot.backendtiimaebot.response.ApiResponse;
 
 @Controller
-@RequestMapping(value = Settings.defaultApiUrl + "user")
+@RequestMapping(value = StaticSettings.defaultApiUrl + "user")
 public class UserController {
 
     private UserDAO userDAO;

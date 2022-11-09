@@ -25,6 +25,10 @@ public class GuildDAO {
         return this.guildRepository.findById(guildId).get();
     }
 
+    public Guild getGuildByGuildId(long guildId) {
+        return this.guildRepository.findByGuildId(guildId).get();
+    }
+
     public Guild createGuildIfDontExist(GuildDTO guildDTO) {
         final Optional<Guild> guild = this.guildRepository.findByGuildId(guildDTO.getGuildId());
         Guild savedGuild = null;

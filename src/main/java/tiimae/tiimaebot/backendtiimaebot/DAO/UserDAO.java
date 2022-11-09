@@ -27,6 +27,10 @@ public class UserDAO {
         return this.userRepository.findById(userId).get();
     }
 
+    public User getUserByUserId(long userId) {
+        return this.userRepository.findByUserId(userId).get();
+    }
+
     public User createUserIfDontExist(UserDTO userDTO) {
         final Optional<User> user = this.userRepository.findByUserId(userDTO.getUserId());
 

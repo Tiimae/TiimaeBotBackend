@@ -2,23 +2,36 @@ package tiimae.tiimaebot.backendtiimaebot.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import tiimae.tiimaebot.backendtiimaebot.DAO.SettingsDAO;
 import tiimae.tiimaebot.backendtiimaebot.DTO.SettingsDTO;
-import tiimae.tiimaebot.backendtiimaebot.Settings;
+import tiimae.tiimaebot.backendtiimaebot.StaticSettings;
+import tiimae.tiimaebot.backendtiimaebot.models.Settings;
 import tiimae.tiimaebot.backendtiimaebot.response.ApiResponse;
 
+import java.util.Locale;
+import java.util.Optional;
+
 @Controller
-@RequestMapping(value = Settings.defaultApiUrl + "setting")
+@RequestMapping(value = StaticSettings.defaultApiUrl + "setting")
 public class SettingsController {
 
     private SettingsDAO settingsDAO;
 
     public SettingsController(SettingsDAO settingsDAO) {
         this.settingsDAO = settingsDAO;
+    }
+
+    @GetMapping("/key/{guildId}/{key}")
+    @ResponseBody
+    public ApiResponse<Settings> getPrefix(@PathVariable long guildId, @PathVariable String key) {
+        final Optional<Settings> keyFromDatabase = this.settingsDAO.getKeyFromDatabase(guildId, key.toUpperCase(Locale.ROOT));
+
+        if (keyFromDatabase.isEmpty()) {
+            return new ApiResponse(HttpStatus.ACCEPTED, "Key not found");
+        } else {
+            return new ApiResponse(HttpStatus.ACCEPTED, keyFromDatabase.get());
+        }
     }
 
     @PostMapping("")

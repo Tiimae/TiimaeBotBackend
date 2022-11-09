@@ -11,4 +11,7 @@ import java.util.UUID;
 
 public interface SettingsRepository extends JpaRepository<Settings, UUID> {
     public List<Settings> findAllSettingsByGuildId(UUID guildId);
+
+
+    public Optional<Settings> findSettingsByGuildIdAndKey(UUID guildId, String key);
 }

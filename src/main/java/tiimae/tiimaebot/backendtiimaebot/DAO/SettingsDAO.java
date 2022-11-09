@@ -2,6 +2,7 @@ package tiimae.tiimaebot.backendtiimaebot.DAO;
 
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import tiimae.tiimaebot.backendtiimaebot.DAO.repo.GuildRepository;
 import tiimae.tiimaebot.backendtiimaebot.DAO.repo.SettingsRepository;
 import tiimae.tiimaebot.backendtiimaebot.DTO.SettingsDTO;
 import tiimae.tiimaebot.backendtiimaebot.DTO.UserDTO;
@@ -17,10 +18,24 @@ public class SettingsDAO {
 
     private SettingsRepository settingsRepository;
     private SettingsMapper settingsMapper;
+    private GuildRepository guildRepository;
 
-    public SettingsDAO(SettingsRepository settingsRepository, @Lazy SettingsMapper settingsMapper) {
+    public SettingsDAO(SettingsRepository settingsRepository, @Lazy SettingsMapper settingsMapper, GuildRepository guildRepository) {
         this.settingsRepository = settingsRepository;
         this.settingsMapper = settingsMapper;
+        this.guildRepository = guildRepository;
+    }
+
+    public Optional<Settings> getKeyFromDatabase(long guildId, String key) {
+        final Optional<Guild> byGuildId = this.guildRepository.findByGuildId(guildId);
+        Optional<Settings> setting = Optional.empty();
+
+        if (!byGuildId.isEmpty()) {
+            final Guild guild = byGuildId.get();
+            setting = this.settingsRepository.findSettingsByGuildIdAndKey(guild.getId(), key);
+        }
+
+        return setting;
     }
 
     public Settings createSettingsIfDontExist(SettingsDTO settingsDTO) {

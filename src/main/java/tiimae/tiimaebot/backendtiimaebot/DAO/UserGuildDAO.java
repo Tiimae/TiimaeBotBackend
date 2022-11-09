@@ -19,13 +19,21 @@ public class UserGuildDAO {
         this.userGuildMapper = userGuildMapper;
     }
 
+    public Optional<UserGuild> getUserGuildById(UUID userGuildId) {
+        return this.userGuildRepository.findById(userGuildId);
+    }
+
     public void createNewUserGuild(UUID userId, UUID guildId) {
-        final Optional<UserGuild> userGuildByIds = this.userGuildRepository.findByUserIdAndGuildId(userId, guildId);
+        final Optional<UUID> userGuildByIds = this.getUserGuildByUserIdAndGuildId(userId, guildId);
 
         if (userGuildByIds.isEmpty()) {
             final UserGuild save = this.userGuildRepository.save(this.userGuildMapper.toUserGuild(userId, guildId));
             save.getXp().setUserGuild(save);
             this.userGuildRepository.saveAndFlush(save);
         }
+    }
+
+    public Optional<UUID> getUserGuildByUserIdAndGuildId(UUID userId, UUID guildId) {
+        return this.userGuildRepository.findByUserIdAndGuildId(userId, guildId);
     }
 }

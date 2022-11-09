@@ -11,5 +11,5 @@ import java.util.UUID;
 public interface UserGuildRepository extends JpaRepository<UserGuild, UUID> {
 
     @Query(value = "SELECT ug.id FROM UserGuild ug WHERE ug.user.id = ?1 AND ug.guild.id = ?2")
-    public Optional<UserGuild> findByUserIdAndGuildId(UUID userId, UUID guildId);
+    public Optional<UUID> findByUserIdAndGuildId(UUID userId, UUID guildId);
 }

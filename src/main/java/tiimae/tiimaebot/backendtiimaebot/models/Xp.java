@@ -1,6 +1,7 @@
 package tiimae.tiimaebot.backendtiimaebot.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,6 +30,7 @@ public class Xp {
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonBackReference
+
     private UserGuild userGuild;
 
     @NotNull
@@ -39,7 +41,7 @@ public class Xp {
     private long level;
 
     @NotNull
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = true)
     @CreationTimestamp
     private Timestamp xplock;
 
