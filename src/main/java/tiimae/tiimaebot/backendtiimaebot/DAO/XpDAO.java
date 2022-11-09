@@ -56,7 +56,6 @@ public class XpDAO {
         final Xp updateXp = this.xpMapper.toXp(xpDTO);
 
         final Xp xp = this.xpMapper.mergeXp(xpOld.get(), updateXp);
-        System.out.println(xp.getXplock());
         this.xpRepository.save(xp);
     }
 }

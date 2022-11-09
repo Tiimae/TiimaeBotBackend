@@ -9,6 +9,8 @@ import tiimae.tiimaebot.backendtiimaebot.StaticSettings;
 import tiimae.tiimaebot.backendtiimaebot.models.Xp;
 import tiimae.tiimaebot.backendtiimaebot.response.ApiResponse;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.UUID;
 
 @Controller
@@ -30,6 +32,11 @@ public class XpController {
     @PutMapping("/{xpId}")
     @ResponseBody
     public ApiResponse updateUserXp(@PathVariable UUID xpId, @RequestBody XpDTO xpDTO) {
+        final Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(xpDTO.getXplock().getTime());
+        cal.add(Calendar.MINUTE, -60);
+        xpDTO.setXplock(new Timestamp(cal.getTime().getTime()));
+
         this.xpDAO.updateXpUser(xpId, xpDTO);
 
         return new ApiResponse(HttpStatus.ACCEPTED, "Xp had been updated");
