@@ -6,25 +6,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import tiimae.tiimaebot.backendtiimaebot.DAO.UserDAO;
-import tiimae.tiimaebot.backendtiimaebot.DTO.UserDTO;
+import tiimae.tiimaebot.backendtiimaebot.DAO.SettingsDAO;
+import tiimae.tiimaebot.backendtiimaebot.DTO.SettingsDTO;
 import tiimae.tiimaebot.backendtiimaebot.Settings;
-import tiimae.tiimaebot.backendtiimaebot.models.User;
 import tiimae.tiimaebot.backendtiimaebot.response.ApiResponse;
 
 @Controller
-@RequestMapping(value = Settings.defaultApiUrl + "user")
-public class UserController {
+@RequestMapping(value = Settings.defaultApiUrl + "setting")
+public class SettingsController {
 
-    private UserDAO userDAO;
+    private SettingsDAO settingsDAO;
 
-    public UserController(UserDAO userDAO) {
-        this.userDAO = userDAO;
+    public SettingsController(SettingsDAO settingsDAO) {
+        this.settingsDAO = settingsDAO;
     }
 
     @PostMapping("")
     @ResponseBody
-    public ApiResponse<User> add(@RequestBody UserDTO userDTO) {
-        return new ApiResponse(HttpStatus.ACCEPTED, this.userDAO.createUserIfDontExist(userDTO));
+    public ApiResponse<Settings> add(@RequestBody SettingsDTO settingsDTO) {
+        return new ApiResponse(HttpStatus.ACCEPTED, this.settingsDAO.createSettingsIfDontExist(settingsDTO));
     }
 }

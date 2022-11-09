@@ -27,7 +27,7 @@ public class UserDAO {
         return this.userRepository.findById(userId).get();
     }
 
-    public User createGuildIfDontExist(UserDTO userDTO) {
+    public User createUserIfDontExist(UserDTO userDTO) {
         final Optional<User> user = this.userRepository.findByUserId(userDTO.getUserId());
 
         User savedUser = null;

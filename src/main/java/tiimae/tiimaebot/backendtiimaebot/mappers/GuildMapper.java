@@ -18,8 +18,6 @@ public class GuildMapper {
         Set<UserGuild> userGuilds = new HashSet<>();
         Settings settings = null;
 
-
-
         return new Guild(name, guildid, userGuilds, settings);
     }
 }

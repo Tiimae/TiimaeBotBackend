@@ -33,4 +33,11 @@ public class Settings {
     @NotNull
     private String value;
 
+    public Settings() { }
+
+    public Settings(Guild guild, String key, String value) {
+        this.guild = guild;
+        this.key = key;
+        this.value = value;
+    }
 }

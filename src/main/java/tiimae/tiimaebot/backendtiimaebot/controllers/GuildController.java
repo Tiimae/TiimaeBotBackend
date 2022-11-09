@@ -22,7 +22,7 @@ public class GuildController {
 
     @PostMapping("")
     @ResponseBody
-    public ApiResponse<Guild> addGuild(@RequestBody GuildDTO guildDTO) {
+    public ApiResponse<Guild> add(@RequestBody GuildDTO guildDTO) {
         return new ApiResponse(HttpStatus.ACCEPTED, this.guildDAO.createGuildIfDontExist(guildDTO));
     }
 }

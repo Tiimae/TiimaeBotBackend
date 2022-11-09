@@ -5,6 +5,7 @@ import tiimae.tiimaebot.backendtiimaebot.DAO.repo.UserGuildRepository;
 import tiimae.tiimaebot.backendtiimaebot.mappers.UserGuildMapper;
 import tiimae.tiimaebot.backendtiimaebot.models.UserGuild;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -19,8 +20,12 @@ public class UserGuildDAO {
     }
 
     public void createNewUserGuild(UUID userId, UUID guildId) {
-        final UserGuild save = this.userGuildRepository.save(this.userGuildMapper.toUserGuild(userId, guildId));
-        save.getXp().setUserGuild(save);
-        this.userGuildRepository.saveAndFlush(save);
+        final Optional<UserGuild> userGuildByIds = this.userGuildRepository.findByUserIdAndGuildId(userId, guildId);
+
+        if (userGuildByIds.isEmpty()) {
+            final UserGuild save = this.userGuildRepository.save(this.userGuildMapper.toUserGuild(userId, guildId));
+            save.getXp().setUserGuild(save);
+            this.userGuildRepository.saveAndFlush(save);
+        }
     }
 }
