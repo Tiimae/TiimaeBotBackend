@@ -7,6 +7,7 @@ import tiimae.tiimaebot.backendtiimaebot.DTO.UserDTO;
 import tiimae.tiimaebot.backendtiimaebot.mappers.UserMapper;
 import tiimae.tiimaebot.backendtiimaebot.models.User;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -49,4 +50,6 @@ public class UserDAO {
 
         return user.get();
     }
+
+
 }

@@ -9,8 +9,10 @@ import tiimae.tiimaebot.backendtiimaebot.StaticSettings;
 import tiimae.tiimaebot.backendtiimaebot.models.Settings;
 import tiimae.tiimaebot.backendtiimaebot.response.ApiResponse;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.UUID;
 
 @Controller
 @RequestMapping(value = StaticSettings.defaultApiUrl + "setting")
@@ -38,5 +40,11 @@ public class SettingsController {
     @ResponseBody
     public ApiResponse<Settings> add(@RequestBody SettingsDTO settingsDTO) {
         return new ApiResponse(HttpStatus.ACCEPTED, this.settingsDAO.createSettingsIfDontExist(settingsDTO));
+    }
+
+    @GetMapping("/all/{guildId}")
+    @ResponseBody
+    public ApiResponse<List<Settings>> getAllGuildSettings(@PathVariable UUID guildId) {
+        return new ApiResponse(HttpStatus.ACCEPTED, this.settingsDAO.getAllSettingsByGuildId(guildId));
     }
 }

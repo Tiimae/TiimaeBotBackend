@@ -12,6 +12,7 @@ import tiimae.tiimaebot.backendtiimaebot.models.Settings;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 public class SettingsDAO {
@@ -55,5 +56,9 @@ public class SettingsDAO {
         }
 
         return savedSetting;
+    }
+
+    public List<Settings> getAllSettingsByGuildId(UUID guildId) {
+        return this.settingsRepository.findAllSettingsByGuildId(guildId);
     }
 }

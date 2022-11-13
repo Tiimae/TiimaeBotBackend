@@ -23,7 +23,7 @@ public class XpController {
         this.xpDAO = xpDAO;
     }
 
-    @GetMapping("{userId}/{guildId}")
+    @GetMapping("/{userId}/{guildId}")
     @ResponseBody
     public ApiResponse getUserXp(@PathVariable long userId, @PathVariable long guildId) {
         return new ApiResponse(HttpStatus.ACCEPTED, this.xpDAO.getUserXp(userId, guildId));

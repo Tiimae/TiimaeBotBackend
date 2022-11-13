@@ -25,6 +25,8 @@ public class User {
     private UUID id;
 
     private String name;
+    private String discriminator;
+    private String tag;
     private long userId;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -33,8 +35,10 @@ public class User {
 
     public User() { }
 
-    public User(String name, long userId, Set<UserGuild> userGuilds) {
+    public User(String name, String discriminator, String tag, long userId, Set<UserGuild> userGuilds) {
         this.name = name;
+        this.discriminator = discriminator;
+        this.tag = tag;
         this.userId = userId;
         this.userGuilds = userGuilds;
     }

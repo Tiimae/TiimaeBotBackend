@@ -7,6 +7,7 @@ import tiimae.tiimaebot.backendtiimaebot.DTO.GuildDTO;
 import tiimae.tiimaebot.backendtiimaebot.mappers.GuildMapper;
 import tiimae.tiimaebot.backendtiimaebot.models.Guild;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -27,6 +28,12 @@ public class GuildDAO {
 
     public Guild getGuildByGuildId(long guildId) {
         return this.guildRepository.findByGuildId(guildId).get();
+    }
+
+    public List<Object> getGuildLeaderboard(long guildId) {
+        final Guild guildByGuildId = this.getGuildByGuildId(guildId);
+
+        return this.guildRepository.getAllByUserByGuildIdSortedOnXp(guildByGuildId.getId());
     }
 
     public Guild createGuildIfDontExist(GuildDTO guildDTO) {

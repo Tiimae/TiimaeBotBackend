@@ -11,6 +11,8 @@ public class UserDTO {
 
     private String name;
     private long userId;
+    private String discriminator;
+    private String tag;
 
     private String[] userGuildIds;
     private UUID guildId;
