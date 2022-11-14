@@ -19,8 +19,8 @@ public class UserGuildDAO {
         this.userGuildMapper = userGuildMapper;
     }
 
-    public Optional<UserGuild> getUserGuildById(UUID userGuildId) {
-        return this.userGuildRepository.findById(userGuildId);
+    public UserGuild getUserGuildById(UUID userGuildId) {
+        return this.userGuildRepository.getById(userGuildId);
     }
 
     public void createNewUserGuild(UUID userId, UUID guildId) {

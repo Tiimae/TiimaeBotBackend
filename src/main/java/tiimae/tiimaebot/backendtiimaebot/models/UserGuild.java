@@ -32,7 +32,7 @@ public class UserGuild {
     @JsonBackReference
     private Guild guild;
 
-    @OneToOne(mappedBy = "userGuild", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "userGuild", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private Xp xp;
 

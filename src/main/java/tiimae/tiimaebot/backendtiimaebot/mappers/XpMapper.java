@@ -25,10 +25,8 @@ public class XpMapper {
         final Timestamp xplock = xpDTO.getXplock();
 
         UserGuild userGuild = null;
-        if (xpDTO.getXplock() != null) {
-            final Optional<UserGuild> userGuildEntry = this.userGuildDAO.getUserGuildById(xpDTO.getUserGuildId());
-
-            userGuild = userGuildEntry.get();
+        if (xpDTO.getUserGuildId() != null) {
+            userGuild = this.userGuildDAO.getUserGuildById(xpDTO.getUserGuildId());
         }
 
         return new Xp(userGuild, exp, level, xplock);
