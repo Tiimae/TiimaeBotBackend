@@ -3,12 +3,8 @@ package tiimae.tiimaebot.backendtiimaebot.mappers;
 import org.springframework.stereotype.Component;
 import tiimae.tiimaebot.backendtiimaebot.DAO.GuildDAO;
 import tiimae.tiimaebot.backendtiimaebot.DAO.UserDAO;
-import tiimae.tiimaebot.backendtiimaebot.models.Guild;
-import tiimae.tiimaebot.backendtiimaebot.models.User;
-import tiimae.tiimaebot.backendtiimaebot.models.UserGuild;
-import tiimae.tiimaebot.backendtiimaebot.models.Xp;
+import tiimae.tiimaebot.backendtiimaebot.models.*;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -38,6 +34,6 @@ public class UserGuildMapper {
             guild = guildEntry;
         }
 
-        return new UserGuild(user, guild, new Xp());
+        return new UserGuild(user, guild, new Xp(), new Money());
     }
 }

@@ -36,12 +36,20 @@ public class UserGuild {
     @JsonManagedReference
     private Xp xp;
 
+    @OneToOne(mappedBy = "userGuild", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private Money money;
+
 
     public UserGuild () { }
 
-    public UserGuild(User user, Guild guild, Xp xp) {
+    public UserGuild(User user, Guild guild, Xp xp, Money money) {
         this.user = user;
         this.guild = guild;
         this.xp = xp;
+        this.money = money;
+
+        this.money.setUserGuild(this);
+        this.xp.setUserGuild(this);
     }
 }
